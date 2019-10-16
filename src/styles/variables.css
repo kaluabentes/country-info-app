@@ -1,0 +1,18 @@
+:root {
+  --font-face: 'Poppins', sans-serif;
+  
+  --color-text: rgb(38, 43, 51);
+  --color-white: #fff;
+  --color-grey: rgb(242, 245, 250);
+  --color-grey-2: #8c8c8c;
+  --color-black: #1e1e1e;
+  --color-black-2: #757575;
+  --color-blue: #0070f3;
+  --color-blue-2: #006ae6;
+  --color-red: #d63230;
+  --color-novice: rgb(255, 89, 89);
+  --color-beginner: rgb(255, 145, 89);
+  --color-skillful: rgb(243, 183, 33);
+  --color-experienced: rgb(128, 204, 20);
+  --color-expert: rgb(37, 184, 105);
+}

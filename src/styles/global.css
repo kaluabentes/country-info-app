@@ -1,0 +1,10 @@
+* {
+  font-family: var(--font-face);
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--color-text);
+  font-size: 1rem;
+  background: var(--color-grey);
+}
