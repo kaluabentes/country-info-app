@@ -1,6 +1,6 @@
-# Next Boilerplate
+# D3 Studio Frontend Challengue
 
-A starter point for Next.js based projects
+A simple application built the challengue.
 
 ## Requirements
 
