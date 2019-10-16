@@ -5,7 +5,10 @@ const THEMES = {
   DARK: 'dark',
 }
 
-const ThemeContext = createContext(THEMES.LIGHT)
+const ThemeContext = createContext({
+  theme: THEMES.LIGHT,
+  toggleTheme: () => {},
+})
 
 ThemeContext.THEMES = THEMES
 

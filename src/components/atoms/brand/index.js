@@ -1,18 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import Link from 'next/link'
 
 import styles from './styles.css'
 
-const THEMES = {
-  light: styles.light,
-  dark: styles.dark,
-}
-
-const Brand = ({ title, href, theme }) => (
+const Brand = ({ title, href }) => (
   <Link href={href}>
-    <h1 className={classnames(styles.brand, theme)}>
+    <h1 className={styles.brand}>
       {title}
     </h1>
   </Link>
@@ -20,14 +14,12 @@ const Brand = ({ title, href, theme }) => (
 
 Brand.propTypes = {
   title: PropTypes.string,
-  theme: PropTypes.string,
   href: PropTypes.string,
 }
 
 Brand.defaultProps = {
   title: '',
   href: '',
-  theme: THEMES.light,
 }
 
 export default Brand

@@ -19,11 +19,22 @@ class Layout extends Component {
   constructor(props) {
     super(props)
 
+    this.handleThemeChange = this.handleThemeChange.bind(this)
+
     this.state = {
       theme: ThemeContext.THEMES.LIGHT,
+      toggleTheme: this.handleThemeChange,
     }
+  }
 
-    this.handleThemeChange = this.handleThemeChange.bind(this)
+  componentDidMount() {
+    const { theme } = this.state
+    document.querySelector('body').setAttribute('class', theme)
+  }
+
+  componentDidUpdate() {
+    const { theme } = this.state
+    document.querySelector('body').setAttribute('class', theme)
   }
 
   handleThemeChange() {
@@ -34,19 +45,16 @@ class Layout extends Component {
 
   render() {
     const { children } = this.props
-    const { theme } = this.state
-    const isThemeActive = theme === ThemeContext.THEMES.LIGHT
+    const { theme, toggleTheme } = this.state
 
     return (
-      <>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <Meta title="Where in the world? - Home" />
         <AppBar
           title="Where in the world?"
-          isThemeActive={isThemeActive}
-          onThemeChange={this.handleThemeChange}
         />
         <main>{children}</main>
-      </>
+      </ThemeContext.Provider>
     )
   }
 }

@@ -6,6 +6,15 @@
 body {
   color: var(--color-text);
   font-size: 1rem;
-  background: var(--color-grey);
   padding-top: 64px;
+}
+
+:global {
+  body.light {
+    background: var(--color-grey);
+  }
+
+  body.dark {
+    background: var(--color-very-dark-blue-background);
+  }
 }

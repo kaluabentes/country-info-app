@@ -1,6 +1,5 @@
 .appBar {
   box-shadow: 0 2px 3px rgba(0,0,0,.2);
-  background: var(--color-white);
   height: 64px;
   width: 100%;
   position: fixed;
@@ -15,4 +14,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.light {
+  background: var(--color-white);
+}
+
+.dark {
+  background: var(--color-dark-blue);
+  color: var(--color-white);
 }

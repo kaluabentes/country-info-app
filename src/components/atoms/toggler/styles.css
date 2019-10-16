@@ -24,7 +24,7 @@
 }
 
 .togglerActive {
-  background-color: var(--color-dark-blue);
+  background-color: var(--color-very-dark-blue-background);
 
   & .needle {
     left: 30px;
