@@ -1,6 +1,6 @@
 # D3 Studio Frontend Challengue
 
-A simple application built the challengue.
+A simple application built for the challengue.
 
 ## Requirements
 
