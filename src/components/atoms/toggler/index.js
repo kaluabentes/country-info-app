@@ -20,7 +20,7 @@ Toggler.propTypes = {
 }
 
 Toggler.defaultProps = {
-  onChange: PropTypes.func,
+  onChange: () => {},
   isActive: false,
 }
 
