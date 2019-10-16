@@ -1,6 +1,6 @@
-# Kalu.dev
+# Next Boilerplate
 
-My personal website built with Next.js
+A starter point for Next.js based projects
 
 ## Requirements
 
