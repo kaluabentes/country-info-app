@@ -1,5 +1,11 @@
 import React from 'react'
 
-const Home = () => <h1>Hello world!</h1>
+import Layout from '_templates/layout'
+
+const Home = () => (
+  <Layout>
+    <h2>Home</h2>
+  </Layout>
+)
 
 export default Home

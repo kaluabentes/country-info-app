@@ -1,0 +1,19 @@
+.themeToggler {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  & i {
+    position: absolute;
+    right: 10px;
+    transition: left 0.14s ease 0s;
+    color: var(--color-text);
+  }
+}
+
+.isActive {
+  & i {
+    left: 10px;
+    color: var(--color-white);
+  }
+}

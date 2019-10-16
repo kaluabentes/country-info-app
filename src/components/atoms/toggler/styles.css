@@ -1,0 +1,32 @@
+.toggler {
+  width: 55px;
+  height: 28px;
+  background-color: rgb(221, 227, 240);
+  position: relative;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.14s ease 0s;
+  padding: 0;
+}
+
+.needle {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(255, 255, 255);
+  transform: translate(0, -50%);
+  border-radius: 50%;
+  transition: left 0.14s ease 0s;
+}
+
+.togglerActive {
+  background-color: var(--color-dark-blue);
+
+  & .needle {
+    left: 30px;
+  }
+}
