@@ -1,0 +1,10 @@
+.emptyState {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: var(--color-grey-2);
+
+  & i {
+    font-size: 130px;
+  }
+}

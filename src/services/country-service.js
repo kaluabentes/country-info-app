@@ -6,6 +6,10 @@ class CountryService {
   static index(fields) {
     return AxiosClient.get(`/all?fields=${fields.join(';')}`).then(handleResponse)
   }
+
+  static search(term, fields) {
+    return AxiosClient.get(`/name/${term}?fields=${fields.join(';')}`).then(handleResponse)
+  }
 }
 
 export default CountryService

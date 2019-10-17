@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 
 import Layout from '_templates/layout'
 import SearchInput from '_atoms/search-input'
@@ -8,8 +8,13 @@ import CountryCard from '_molecules/country-card'
 import CountryService from '_services/country-service'
 import RegionService from '_services/region-service'
 import ContentLoader from '_molecules/content-loader'
+import EmptyState from '_molecules/empty-state'
 
 import styles from './styles.css'
+
+const MAX_COUNTRIES = 6
+
+const ERROR_NOT_FOUND = 'Not found'
 
 const REGIONS = [
   {
@@ -44,14 +49,23 @@ class Home extends Component {
       searchTerm: '',
       regionFilter: '',
       countries: [],
-      isLoading: true,
+      isLoading: false,
+      currentPage: 1,
+      errorMessage: '',
     }
+
+    this.gridRef = createRef()
 
     this.handleSearch = this.handleSearch.bind(this)
     this.handleFilter = this.handleFilter.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.fetchAllCountries()
+    window.addEventListener('scroll', this.handleWindowScroll)
+  }
+
+  async fetchAllCountries() {
     this.setState({
       isLoading: true,
     })
@@ -77,10 +91,44 @@ class Home extends Component {
     })
   }
 
+  async searchCountryByName(countryName) {
+    this.setState({
+      isLoading: true,
+    })
+
+    try {
+      const countries = await CountryService.search(countryName, REQUEST_FIELDS)
+
+      this.setState({
+        countries,
+        isLoading: false,
+      })
+    } catch (e) {
+      this.setState({
+        countries: [],
+        errorMessage: e.response.data.message || ERROR_NOT_FOUND,
+        isLoading: false,
+      })
+    }
+  }
+
   handleSearch(event) {
+    const { target: { value } } = event
+
     this.setState({
       searchTerm: event.target.value,
     })
+
+    clearTimeout(this.searchTimeout)
+
+    if (!value) {
+      this.fetchAllCountries()
+      return
+    }
+
+    this.searchTimeout = setTimeout(() => {
+      this.searchCountryByName(value)
+    }, 600)
   }
 
   handleFilter(region) {
@@ -90,12 +138,41 @@ class Home extends Component {
     })
   }
 
+  renderCards() {
+    const {
+      errorMessage,
+      countries,
+      currentPage,
+    } = this.state
+    const startIndex = (currentPage * MAX_COUNTRIES) - MAX_COUNTRIES
+    const endIndex = currentPage * MAX_COUNTRIES
+
+    if (!countries.length) {
+      return <EmptyState title={errorMessage} />
+    }
+
+    return (
+      <div ref={this.gridRef} className={styles.cardsGrid}>
+        {countries
+          .slice(startIndex, endIndex)
+          .map((country) => (
+            <CountryCard
+              title={country.name}
+              image={country.flag}
+              population={country.population}
+              region={country.region}
+              capital={country.capital}
+            />
+          ))}
+      </div>
+    )
+  }
+
   render() {
     const {
       searchTerm,
       regionFilter,
       isLoading,
-      countries
     } = this.state
 
     return (
@@ -114,21 +191,7 @@ class Home extends Component {
               options={REGIONS}
             />
           </div>
-          {isLoading ? (
-            <ContentLoader />
-          ) : (
-            <div className={styles.cardsGrid}>
-              {countries.map((country) => (
-                <CountryCard
-                  title={country.name}
-                  image={country.flag}
-                  population={country.population}
-                  region={country.region}
-                  capital={country.capital}
-                />
-              ))}
-            </div>
-          )}
+          {isLoading ? <ContentLoader /> : this.renderCards()}
         </Container>
       </Layout>
     )
