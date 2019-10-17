@@ -1,0 +1,27 @@
+.button {
+  padding: 15px 20px;
+  background: transparent;
+  border: 0;
+  box-shadow: 0 3px 6px 0 rgba(0,0,0,.1), 0 1px 3px 0 rgba(0,0,0,.08);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  text-decoration: none;
+
+  & i {
+    font-size: 22px;
+    margin-right: 15px;
+  }
+}
+
+.light {
+  background: var(--color-white);
+}
+
+.dark {
+  background: var(--color-dark-blue);
+  color: var(--color-white);
+}
