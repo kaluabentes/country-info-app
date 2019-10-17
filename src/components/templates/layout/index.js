@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import AppBar from '_organisms/app-bar'
 import Meta from '_atoms/meta'
-import ThemeContext from '_contexts/theme'
+import ThemeContext from '_contexts/theme-context'
 
 import '_styles/base.css'
 

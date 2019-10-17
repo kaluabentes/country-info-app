@@ -1,0 +1,85 @@
+.spinner {
+  position: relative;
+  border-radius: 50%;
+}
+
+.thinCircle {
+  height: 0;
+  width: 0;
+  border-radius: 50%;
+  border-top: 30px solid transparent;
+  border-left: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  animation: rotate 1s infinite;
+}
+
+.innerCircle {
+  position: absolute;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.large {
+  height: 60px;
+  width: 60px;
+
+  & .thinCircle {
+    border-width: 30px;
+  }
+
+  & .innerCircle {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.small {
+  height: 30px;
+  width: 30px;
+
+  & .thinCircle {
+    border-width: 15px;
+  }
+
+  & .innerCircle {
+    height: 23px;
+    width: 23px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.light {
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0.8;
+
+  .innerCircle {
+    background: var(--color-grey);
+  }
+
+  .thinCircle {
+    border-right: 30px solid var(--color-dark-blue);
+  }
+}
+
+.dark {
+  background: var(--color-dark-blue);
+
+  .innerCircle {
+    background: var(--color-very-dark-blue-background);
+  }
+
+  .thinCircle {
+    border-right: 30px solid var(--color-white);
+  }
+}
+

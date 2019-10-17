@@ -5,6 +5,8 @@ import SearchInput from '_atoms/search-input'
 import Container from '_atoms/container'
 import Select from '_atoms/select'
 import CountryCard from '_molecules/country-card'
+import CountryService from '_services/country-service'
+import ContentLoader from '_molecules/content-loader'
 
 import styles from './styles.css'
 
@@ -38,10 +40,27 @@ class Home extends Component {
     this.state = {
       searchTerm: '',
       filterValue: '',
+      countries: [],
+      isLoading: true,
     }
 
     this.handleSearch = this.handleSearch.bind(this)
     this.handleFilter = this.handleFilter.bind(this)
+  }
+
+  async componentDidMount() {
+    const fields = ['flag', 'name', 'population', 'region', 'capital']
+
+    this.setState({
+      isLoading: true,
+    })
+
+    const countries = await CountryService.index(fields)
+
+    this.setState({
+      countries,
+      isLoading: false,
+    })
   }
 
   handleSearch(event) {
@@ -57,7 +76,12 @@ class Home extends Component {
   }
 
   render() {
-    const { searchTerm, filterValue } = this.state
+    const {
+      searchTerm,
+      filterValue,
+      isLoading,
+      countries
+    } = this.state
 
     return (
       <Layout>
@@ -75,50 +99,21 @@ class Home extends Component {
               options={COUNTRIES}
             />
           </div>
-          <div className={styles.cardsGrid}>
-            <CountryCard
-              title="Germany"
-              image="https://restcountries.eu/data/deu.svg"
-              population="81,770,900"
-              region="Europe"
-              capital="Berlin"
-            />
-            <CountryCard
-              title="Germany"
-              image="https://restcountries.eu/data/deu.svg"
-              population="81,770,900"
-              region="Europe"
-              capital="Berlin"
-            />
-            <CountryCard
-              title="Germany"
-              image="https://restcountries.eu/data/deu.svg"
-              population="81,770,900"
-              region="Europe"
-              capital="Berlin"
-            />
-            <CountryCard
-              title="Germany"
-              image="https://restcountries.eu/data/deu.svg"
-              population="81,770,900"
-              region="Europe"
-              capital="Berlin"
-            />
-            <CountryCard
-              title="Germany"
-              image="https://restcountries.eu/data/deu.svg"
-              population="81,770,900"
-              region="Europe"
-              capital="Berlin"
-            />
-            <CountryCard
-              title="Germany"
-              image="https://restcountries.eu/data/deu.svg"
-              population="81,770,900"
-              region="Europe"
-              capital="Berlin"
-            />
-          </div>
+          {isLoading ? (
+            <ContentLoader />
+          ) : (
+            <div className={styles.cardsGrid}>
+              {countries.map((country) => (
+                <CountryCard
+                  title={country.name}
+                  image={country.flag}
+                  population={country.population}
+                  region={country.region}
+                  capital={country.capital}
+                />
+              ))}
+            </div>
+          )}
         </Container>
       </Layout>
     )

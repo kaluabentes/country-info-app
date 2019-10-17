@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import ClickOutside from 'react-click-outside'
 
-import ThemeContext from '_contexts/theme'
+import ThemeContext from '_contexts/theme-context'
 import Icon from '_atoms/icon'
 
 import styles from './styles.css'
