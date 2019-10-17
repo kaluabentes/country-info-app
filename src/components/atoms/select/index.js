@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import ClickOutside from 'react-click-outside'
 
 import ThemeContext from '_contexts/theme'
 import Icon from '_atoms/icon'
@@ -35,37 +36,39 @@ const Select = ({
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
-        <div
-          className={
-            classnames(
-              styles.container,
-              THEMES[theme],
-              { [styles.open]: isOpen }
-            )
-          }
-        >
-          <button
-            type="button"
-            onClick={handleToggle}
-            onKeyPress={handleKeyPress}
-            className={styles.currentValue}
+        <ClickOutside onClickOutside={handleToggle}>
+          <div
+            className={
+              classnames(
+                styles.container,
+                THEMES[theme],
+                { [styles.open]: isOpen }
+              )
+            }
           >
-            {value || placeholder}
-            <Icon name="ion-ios-arrow-down" />
-          </button>
-          <div className={styles.options}>
-            {options.map(({ value: val, label }) => (
-              <button
-                type="button"
-                onClick={() => handleClick(value)}
-                className={styles.option}
-                value={val}
-              >
-                {label}
-              </button>
-            ))}
+            <button
+              type="button"
+              onClick={handleToggle}
+              onKeyPress={handleKeyPress}
+              className={styles.currentValue}
+            >
+              {value || placeholder}
+              <Icon name="ion-ios-arrow-down" />
+            </button>
+            <div className={styles.options}>
+              {options.map(({ value: val, label }) => (
+                <button
+                  type="button"
+                  onClick={() => handleClick(val)}
+                  className={styles.option}
+                  value={val}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </ClickOutside>
       )}
     </ThemeContext.Consumer>
   )
