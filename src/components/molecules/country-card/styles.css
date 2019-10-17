@@ -1,0 +1,41 @@
+.card {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px 0 rgba(0,0,0,.1), 0 1px 3px 0 rgba(0,0,0,.08);
+  cursor: pointer;
+}
+
+.title {
+  margin: 0 0 20px 0;
+}
+
+.field {
+  margin: 0 0 10px 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.image {
+  width: 100%;
+}
+
+.bolded {
+  font-weight: 800;
+}
+
+.content {
+  padding: 30px;
+  font-weight: 600;
+}
+
+.light {
+  background: var(--color-white);
+  color: inherit;
+}
+
+.dark {
+  background: var(--color-dark-blue);
+  color: var(--color-white);
+}

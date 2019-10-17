@@ -4,6 +4,7 @@ import Layout from '_templates/layout'
 import SearchInput from '_atoms/search-input'
 import Container from '_atoms/container'
 import Select from '_atoms/select'
+import CountryCard from '_molecules/country-card'
 
 const COUNTRIES = [
   {
@@ -69,6 +70,13 @@ class Home extends Component {
             value={filterValue}
             placeholder="Filter by Region"
             options={COUNTRIES}
+          />
+          <CountryCard
+            title="Germany"
+            image="https://restcountries.eu/data/deu.svg"
+            population="81,770,900"
+            region="Europe"
+            capital="Berlin"
           />
         </Container>
       </Layout>
