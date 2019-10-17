@@ -18,6 +18,10 @@ const Select = ({
 }) => {
   const [isOpen, setOpen] = useState(false)
 
+  const handleClickOutside = () => {
+    setOpen(false)
+  }
+
   const handleToggle = () => {
     setOpen(!isOpen)
   }
@@ -36,7 +40,7 @@ const Select = ({
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
-        <ClickOutside onClickOutside={handleToggle}>
+        <ClickOutside onClickOutside={handleClickOutside}>
           <div
             className={
               classnames(

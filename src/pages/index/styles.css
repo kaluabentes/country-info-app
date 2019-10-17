@@ -1,0 +1,19 @@
+.controls {
+  @media (--break-desktop) {
+    display: flex;
+    padding: 50px 0;
+    justify-content: space-between;
+  }
+}
+
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 60px;
+  margin-bottom: 60px;
+
+  @media (--break-desktop) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
