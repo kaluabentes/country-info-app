@@ -6,18 +6,19 @@ import Container from '_atoms/container'
 import Select from '_atoms/select'
 import CountryCard from '_molecules/country-card'
 import CountryService from '_services/country-service'
+import RegionService from '_services/region-service'
 import ContentLoader from '_molecules/content-loader'
 
 import styles from './styles.css'
 
-const COUNTRIES = [
+const REGIONS = [
   {
     label: 'Africa',
     value: 'Africa',
   },
   {
-    label: 'America',
-    value: 'America',
+    label: 'Americas',
+    value: 'Americas',
   },
   {
     label: 'Asia',
@@ -33,13 +34,15 @@ const COUNTRIES = [
   },
 ]
 
+const REQUEST_FIELDS = ['flag', 'name', 'population', 'region', 'capital']
+
 class Home extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       searchTerm: '',
-      filterValue: '',
+      regionFilter: '',
       countries: [],
       isLoading: true,
     }
@@ -49,13 +52,24 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    const fields = ['flag', 'name', 'population', 'region', 'capital']
-
     this.setState({
       isLoading: true,
     })
 
-    const countries = await CountryService.index(fields)
+    const countries = await CountryService.index(REQUEST_FIELDS)
+
+    this.setState({
+      countries,
+      isLoading: false,
+    })
+  }
+
+  async fetchCountriesByRegion(region) {
+    this.setState({
+      isLoading: true,
+    })
+
+    const countries = await RegionService.index(region, REQUEST_FIELDS)
 
     this.setState({
       countries,
@@ -69,16 +83,17 @@ class Home extends Component {
     })
   }
 
-  handleFilter(value) {
+  handleFilter(region) {
+    this.fetchCountriesByRegion(region)
     this.setState({
-      filterValue: value,
+      regionFilter: region,
     })
   }
 
   render() {
     const {
       searchTerm,
-      filterValue,
+      regionFilter,
       isLoading,
       countries
     } = this.state
@@ -94,9 +109,9 @@ class Home extends Component {
             />
             <Select
               onChange={this.handleFilter}
-              value={filterValue}
+              value={regionFilter}
               placeholder="Filter by Region"
-              options={COUNTRIES}
+              options={REGIONS}
             />
           </div>
           {isLoading ? (
