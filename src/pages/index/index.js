@@ -9,10 +9,11 @@ import CountryService from '_services/country-service'
 import RegionService from '_services/region-service'
 import ContentLoader from '_molecules/content-loader'
 import EmptyState from '_molecules/empty-state'
+import Pagination from '_molecules/pagination'
 
 import styles from './styles.css'
 
-const MAX_COUNTRIES = 6
+const MAX_COUNTRIES = 12
 
 const ERROR_NOT_FOUND = 'Not found'
 
@@ -58,11 +59,11 @@ class Home extends Component {
 
     this.handleSearch = this.handleSearch.bind(this)
     this.handleFilter = this.handleFilter.bind(this)
+    this.handlePaginationClick = this.handlePaginationClick.bind(this)
   }
 
   componentDidMount() {
     this.fetchAllCountries()
-    window.addEventListener('scroll', this.handleWindowScroll)
   }
 
   async fetchAllCountries() {
@@ -138,6 +139,12 @@ class Home extends Component {
     })
   }
 
+  handlePaginationClick(page) {
+    this.setState({
+      currentPage: page,
+    })
+  }
+
   renderCards() {
     const {
       errorMessage,
@@ -164,6 +171,12 @@ class Home extends Component {
               capital={country.capital}
             />
           ))}
+        <Pagination
+          onClick={this.handlePaginationClick}
+          currentPage={currentPage}
+          collection={countries}
+          maxItems={MAX_COUNTRIES}
+        />
       </div>
     )
   }

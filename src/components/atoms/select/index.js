@@ -13,10 +13,25 @@ const THEMES = {
   dark: styles.dark,
 }
 
+const POSITIONS = {
+  left: styles.left,
+  right: styles.right,
+  top: styles.top,
+  bottom: styles.bottom,
+}
+
 const Select = ({
-  onChange, value, options, placeholder
+  onChange,
+  value,
+  options,
+  placeholder,
+  position,
 }) => {
   const [isOpen, setOpen] = useState(false)
+  const positions = position
+    .split(' ')
+    .map((pos) => POSITIONS[pos])
+  const currentOption = options.find((op) => op.value === value)
 
   const handleClickOutside = () => {
     setOpen(false)
@@ -46,7 +61,8 @@ const Select = ({
               classnames(
                 styles.container,
                 THEMES[theme],
-                { [styles.open]: isOpen }
+                { [styles.open]: isOpen },
+                positions
               )
             }
           >
@@ -56,7 +72,7 @@ const Select = ({
               onKeyPress={handleKeyPress}
               className={styles.currentValue}
             >
-              {value || placeholder}
+              {currentOption ? currentOption.label : placeholder}
               <Icon name="ion-ios-arrow-down" />
             </button>
             <div className={styles.options}>
@@ -86,6 +102,7 @@ Select.propTypes = {
     value: PropTypes.string,
   })),
   placeholder: PropTypes.string,
+  position: PropTypes.string,
 }
 
 Select.defaultProps = {
@@ -93,6 +110,7 @@ Select.defaultProps = {
   value: '',
   options: [],
   placeholder: '',
+  position: 'left top',
 }
 
 export default Select

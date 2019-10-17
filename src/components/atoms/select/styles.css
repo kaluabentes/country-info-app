@@ -74,3 +74,36 @@
   }
 }
 
+.left {
+  .options {
+    left: 0;
+    right: initial;
+  }
+}
+
+.right {
+  .options {
+    right: 0;
+    left: initial;
+  }
+}
+
+.bottom {
+  .options {
+    bottom: 65px;
+    top: initial;
+  }
+
+  & .currentValue {
+    & i {
+      transform: rotate(180deg);  
+    }
+  }
+}
+
+.top {
+  .options {
+    top: 65px;
+    bottom: initial;
+  }
+}
