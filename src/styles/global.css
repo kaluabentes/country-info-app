@@ -16,5 +16,6 @@ body {
 
   body.dark {
     background: var(--color-very-dark-blue-background);
+    color: var(--color-white);
   }
 }

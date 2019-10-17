@@ -9,20 +9,8 @@
   margin: 0 0 20px 0;
 }
 
-.field {
-  margin: 0 0 10px 0;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
 .image {
   width: 100%;
-}
-
-.bolded {
-  font-weight: 800;
 }
 
 .content {

@@ -1,0 +1,48 @@
+.actions {
+  padding: 50px 0;
+}
+
+.countryDetail,
+.countryContentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 60px;
+
+  @media (--break-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.countryContentGrid {
+  margin-bottom: 40px;
+}
+
+.countryTitle {
+  margin-bottom: 40px;
+}
+
+.countryImage {
+  width: 100%;
+}
+
+.borderCountries {
+  & span {
+    font-weight: 600;
+    margin-right: 20px;
+
+    @media (--break-mobile) {
+      font-size: 1.3rem;
+      display: block;
+      margin: 0 0 20px 0;
+    }
+  }
+
+  & button {
+    margin-right: 10px;
+
+    @media (--break-mobile) {
+      margin: 0 10px 10px 0;
+    }
+  }
+}
+

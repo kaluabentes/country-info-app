@@ -12,45 +12,63 @@ const THEMES = {
   dark: styles.dark,
 }
 
+const SIZES = {
+  default: styles.default,
+  small: styles.small,
+}
+
 const Button = ({
   onClick,
   children,
   icon,
-  href
-}) => (
-  <ThemeContext.Consumer>
-    {({ theme }) => (href ? (
-      <a
-        className={classnames(styles.button, THEMES[theme])}
-        href={href}
-      >
-        <Icon name={icon} />
-        {children}
-      </a>
-    ) : (
-      <button
-        type="button"
-        className={classnames(styles.button, THEMES[theme])}
-        onClick={onClick}
-      >
-        <Icon name={icon} />
-        {children}
-      </button>
-    ))}
-  </ThemeContext.Consumer>
-)
+  href,
+  size
+}) => {
+  const getClassNames = (theme) => classnames(
+    styles.button,
+    THEMES[theme],
+    size
+  )
+
+  return (
+    <ThemeContext.Consumer>
+      {({ theme }) => (href ? (
+        <a
+          className={getClassNames(theme)}
+          href={href}
+        >
+          <Icon name={icon} />
+          {children}
+        </a>
+      ) : (
+        <button
+          type="button"
+          className={getClassNames(theme)}
+          onClick={onClick}
+        >
+          {icon && <Icon name={icon} />}
+          {children}
+        </button>
+      ))}
+    </ThemeContext.Consumer>
+  )
+}
 
 Button.propTypes = {
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   icon: PropTypes.string,
   href: PropTypes.string,
+  size: PropTypes.string,
 }
 
 Button.defaultProps = {
   onClick: () => {},
   icon: '',
   href: '',
+  size: SIZES.default,
 }
+
+Button.sizes = SIZES
 
 export default Button

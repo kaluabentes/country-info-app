@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import ThemeContext from '_contexts/theme'
+import CountryField from '_atoms/country-field'
 
 import styles from './styles.css'
 
@@ -38,27 +39,20 @@ const CountryCard = ({
           <img className={styles.image} src={image} alt={title} />
           <div className={styles.content}>
             <h2 className={styles.title}>{title}</h2>
-            <p className={styles.field}>
-              <span className={styles.bolded}>
-                Population:
-              </span>
-              {' '}
-              {population}
-            </p>
-            <p className={styles.field}>
-              <span className={styles.bolded}>
-                Region:
-              </span>
-              {' '}
-              {region}
-            </p>
-            <p className={styles.field}>
-              <span className={styles.bolded}>
-                Capital:
-              </span>
-              {' '}
-              {capital}
-            </p>
+            <div className={styles.fields}>
+              <CountryField
+                label="Population"
+                value={population}
+              />
+              <CountryField
+                label="Region"
+                value={region}
+              />
+              <CountryField
+                label="Capital"
+                value={capital}
+              />
+            </div>
           </div>
         </div>
       )}
