@@ -1,4 +1,6 @@
 import React, { Component, createRef } from 'react'
+import { withRouter } from 'next/router'
+import PropTypes from 'prop-types'
 
 import Layout from '_templates/layout'
 import SearchInput from '_atoms/search-input'
@@ -10,6 +12,7 @@ import RegionService from '_services/region-service'
 import ContentLoader from '_molecules/content-loader'
 import EmptyState from '_molecules/empty-state'
 import Pagination from '_molecules/pagination'
+import Storage from '_utils/storage'
 
 import styles from './styles.css'
 
@@ -40,7 +43,7 @@ const REGIONS = [
   },
 ]
 
-const REQUEST_FIELDS = ['flag', 'name', 'population', 'region', 'capital']
+const REQUEST_FIELDS = ['flag', 'name', 'population', 'region', 'capital', 'name', 'alpha3Code']
 
 class Home extends Component {
   constructor(props) {
@@ -72,6 +75,11 @@ class Home extends Component {
     })
 
     const countries = await CountryService.index(REQUEST_FIELDS)
+
+    const countriesAlphaCodes = Storage.getItem('countriesAlphaCodes')
+    if (!countriesAlphaCodes) {
+      Storage.setItem('countriesAlphaCodes', countries.reduce((prev, curr) => ({ ...prev, [curr.alpha3Code]: curr.name }), {}))
+    }
 
     this.setState({
       countries,
@@ -132,6 +140,12 @@ class Home extends Component {
     }, 600)
   }
 
+  handleCountryClick(name) {
+    const { router } = this.props
+
+    router.push(`/detail?country=${name}`)
+  }
+
   handleFilter(region) {
     this.fetchCountriesByRegion(region)
     this.setState({
@@ -164,6 +178,7 @@ class Home extends Component {
           .slice(startIndex, endIndex)
           .map((country) => (
             <CountryCard
+              onClick={() => this.handleCountryClick(country.alpha3Code)}
               title={country.name}
               image={country.flag}
               population={country.population}
@@ -211,4 +226,10 @@ class Home extends Component {
   }
 }
 
-export default Home
+Home.propTypes = {
+  router: PropTypes.shape({
+    push: PropTypes.func
+  }).isRequired,
+}
+
+export default withRouter(Home)

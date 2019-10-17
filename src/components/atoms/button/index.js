@@ -37,7 +37,7 @@ const Button = ({
           className={getClassNames(theme)}
           href={href}
         >
-          <Icon name={icon} />
+          {icon && <Icon name={icon} />}
           {children}
         </a>
       ) : (

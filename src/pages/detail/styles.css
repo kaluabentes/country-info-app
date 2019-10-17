@@ -2,6 +2,10 @@
   padding: 50px 0;
 }
 
+.countryDetail {
+  margin-bottom: 60px;
+}
+
 .countryDetail,
 .countryContentGrid {
   display: grid;
@@ -37,12 +41,7 @@
     }
   }
 
-  & button {
-    margin-right: 10px;
-
-    @media (--break-mobile) {
-      margin: 0 10px 10px 0;
-    }
+  & a {
+    margin: 0 10px 10px 0;
   }
 }
-
