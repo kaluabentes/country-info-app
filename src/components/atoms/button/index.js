@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import { useRouter } from 'next/router'
 
 import ThemeContext from '_contexts/theme-context'
 import Icon from '_atoms/icon'
@@ -21,35 +22,32 @@ const Button = ({
   onClick,
   children,
   icon,
+  size,
   href,
-  size
 }) => {
+  const router = useRouter()
   const getClassNames = (theme) => classnames(
     styles.button,
     THEMES[theme],
     size
   )
 
+  const handleNav = () => {
+    router.push(href)
+  }
+
   return (
     <ThemeContext.Consumer>
-      {({ theme }) => (href ? (
-        <a
-          className={getClassNames(theme)}
-          href={href}
-        >
-          {icon && <Icon name={icon} />}
-          {children}
-        </a>
-      ) : (
+      {({ theme }) => (
         <button
-          type="button"
           className={getClassNames(theme)}
-          onClick={onClick}
+          type="button"
+          onClick={href ? handleNav : onClick}
         >
           {icon && <Icon name={icon} />}
           {children}
         </button>
-      ))}
+      )}
     </ThemeContext.Consumer>
   )
 }

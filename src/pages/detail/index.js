@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'next/router'
+import { withRouter, Router } from 'next/router'
 import PropTypes from 'prop-types'
 
 import Layout from '_templates/layout'
@@ -60,9 +60,13 @@ class Detail extends Component {
       isLoading: true,
       isNotFound: false,
     }
+
+    Router.events.on('routeChangeComplete', () => {
+      this.fetchCountryDetails()
+    })
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { router } = this.props
 
     if (!router.asPath.match(/country/)) {
@@ -72,6 +76,16 @@ class Detail extends Component {
       return
     }
 
+    this.fetchCountryDetails()
+  }
+
+  async fetchCountryDetails() {
+    const { router } = this.props
+
+    this.setState({
+      isLoading: true,
+    })
+
     const countryCode = router.asPath.split('=')[1]
     const country = await CountryService.show(countryCode, FIELDS)
 
@@ -79,6 +93,8 @@ class Detail extends Component {
       country,
       isLoading: false,
     })
+
+    window.scrollTo(0, 0)
   }
 
   renderCountryDetail() {
@@ -165,7 +181,12 @@ class Detail extends Component {
       <Layout title={`Detail of ${countryName}`}>
         <Container>
           <div className={styles.actions}>
-            <Button href="/" icon="ion-md-arrow-back">Back</Button>
+            <Button
+              href="/"
+              icon="ion-md-arrow-back"
+            >
+              Back
+            </Button>
           </div>
           {isNotFound ? <EmptyState title="Not Found" /> : this.renderCountryDetail()}
         </Container>
