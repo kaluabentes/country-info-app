@@ -53,7 +53,7 @@ class Home extends Component {
       searchTerm: '',
       regionFilter: '',
       countries: [],
-      isLoading: false,
+      isLoading: true,
       currentPage: 1,
       errorMessage: '',
     }

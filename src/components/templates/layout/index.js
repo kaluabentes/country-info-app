@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import AppBar from '_organisms/app-bar'
 import Meta from '_atoms/meta'
 import ThemeContext from '_contexts/theme-context'
+import Storage from '_utils/storage'
 
 import '_styles/base.css'
 
@@ -29,7 +30,13 @@ class Layout extends Component {
 
   componentDidMount() {
     const { theme } = this.state
-    document.querySelector('body').setAttribute('class', theme)
+    const defaultTheme = Storage.getItem('defaultTheme')
+
+    document.querySelector('body').setAttribute('class', defaultTheme || theme)
+
+    this.setState({
+      theme: defaultTheme,
+    })
   }
 
   componentDidUpdate() {
@@ -38,9 +45,13 @@ class Layout extends Component {
   }
 
   handleThemeChange() {
-    this.setState((prevState) => ({
-      theme: getAlternativeTheme(prevState)
-    }))
+    this.setState((prevState) => {
+      Storage.setItem('defaultTheme', getAlternativeTheme(prevState))
+
+      return {
+        theme: getAlternativeTheme(prevState)
+      }
+    })
   }
 
   render() {
