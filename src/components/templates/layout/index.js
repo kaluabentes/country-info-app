@@ -55,12 +55,12 @@ class Layout extends Component {
   }
 
   render() {
-    const { children } = this.props
+    const { children, title } = this.props
     const { theme, toggleTheme } = this.state
 
     return (
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <Meta title="Where in the world? - Home" />
+        <Meta title={`Where in the world? - ${title}`} />
         <AppBar
           title="Where in the world?"
         />
@@ -72,6 +72,7 @@ class Layout extends Component {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
 }
 
 export default Layout

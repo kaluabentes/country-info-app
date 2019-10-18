@@ -158,10 +158,11 @@ class Detail extends Component {
   }
 
   render() {
-    const { isNotFound } = this.state
+    const { country, isNotFound } = this.state
+    const countryName = country ? country.name : ''
 
     return (
-      <Layout>
+      <Layout title={`Detail of ${countryName}`}>
         <Container>
           <div className={styles.actions}>
             <Button href="/" icon="ion-md-arrow-back">Back</Button>

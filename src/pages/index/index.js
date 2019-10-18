@@ -205,7 +205,7 @@ class Home extends Component {
     } = this.state
 
     return (
-      <Layout>
+      <Layout title="Home">
         <Container>
           <div className={styles.controls}>
             <SearchInput
