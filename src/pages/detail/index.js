@@ -43,6 +43,14 @@ const getLanguages = (languages) => {
   return ''
 }
 
+const getTopLevelDomain = (topLevelDomains) => {
+  if (topLevelDomains.length) {
+    return topLevelDomains[0]
+  }
+
+  return ''
+}
+
 class Detail extends Component {
   constructor(props) {
     super(props)
@@ -118,7 +126,7 @@ class Detail extends Component {
             <div>
               <CountryField
                 label="Top Level Domain"
-                value={country.topLevelDomain}
+                value={getTopLevelDomain(country.topLevelDomain)}
               />
               <CountryField
                 label="Currency"
@@ -135,6 +143,7 @@ class Detail extends Component {
               <span>Border Countries:</span>
               {country.borders.map((border) => (
                 <Button
+                  key={border}
                   href={`/detail?country=${border}`}
                   size={Button.sizes.small}
                 >

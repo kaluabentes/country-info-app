@@ -15,7 +15,10 @@ const CountryField = ({ label, value }) => (
 
 CountryField.propTypes = {
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 }
 
 CountryField.defaultProps = {

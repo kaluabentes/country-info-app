@@ -63,7 +63,10 @@ const CountryCard = ({
 CountryCard.propTypes = {
   title: PropTypes.string,
   image: PropTypes.string,
-  population: PropTypes.string,
+  population: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   region: PropTypes.string,
   capital: PropTypes.string,
   onClick: PropTypes.func,

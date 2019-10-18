@@ -178,6 +178,7 @@ class Home extends Component {
           .slice(startIndex, endIndex)
           .map((country) => (
             <CountryCard
+              key={country.alpha3Code}
               onClick={() => this.handleCountryClick(country.alpha3Code)}
               title={country.name}
               image={country.flag}

@@ -78,6 +78,7 @@ const Select = ({
             <div className={styles.options}>
               {options.map(({ value: val, label }) => (
                 <button
+                  key={val}
                   type="button"
                   onClick={() => handleClick(val)}
                   className={styles.option}
@@ -96,10 +97,16 @@ const Select = ({
 
 Select.propTypes = {
   onChange: PropTypes.func,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   options: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   })),
   placeholder: PropTypes.string,
   position: PropTypes.string,
