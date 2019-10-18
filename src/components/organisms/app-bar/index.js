@@ -17,7 +17,7 @@ const THEMES = {
 const AppBar = ({ title }) => (
   <ThemeContext.Consumer>
     {({ theme, toggleTheme }) => (
-      <header className={classnames(styles.appBar, THEMES[theme])}>
+      <header className={classnames(styles.appBar, THEMES[theme], theme)}>
         <Container>
           <div className={styles.inner}>
             <Brand

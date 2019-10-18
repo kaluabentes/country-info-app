@@ -34,13 +34,16 @@ class Layout extends Component {
 
     document.querySelector('body').setAttribute('class', defaultTheme || theme)
 
-    this.setState({
-      theme: defaultTheme,
-    })
+    if (defaultTheme) {
+      this.setState({
+        theme: defaultTheme
+      })
+    }
   }
 
   componentDidUpdate() {
     const { theme } = this.state
+
     document.querySelector('body').setAttribute('class', theme)
   }
 
