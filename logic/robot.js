@@ -99,7 +99,7 @@ class Robot {
   }
 
   walk() {
-    if (this.getCurrentValue() === 9) {
+    if (this.hasFound()) {
       console.log('Found!')
       return
     }
@@ -121,7 +121,7 @@ class Robot {
         this.walkRight()
         this.printProgress()
 
-        if (this.getCurrentValue() === 9) {
+        if (this.hasFound()) {
           console.log('Found!')
           return
         }
