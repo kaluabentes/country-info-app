@@ -1,4 +1,4 @@
-# React Countries Challengue
+# React Countries
 
 A simple countries app that lists and details every country built with React.js
 
