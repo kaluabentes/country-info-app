@@ -1,4 +1,4 @@
-# D3 Studio Frontend Challengue
+# Country Info App
 
 A simple application built for the challengue.
 
