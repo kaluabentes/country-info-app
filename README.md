@@ -1,6 +1,6 @@
-# Country Info App
+# React Countries Challengue
 
-A simple application built for the challengue.
+A simple countries app that lists and details every country built with React.js
 
 ## Requirements
 
