@@ -1,6 +1,6 @@
-# React Countries
+# React Countrie
 
-A simple countries app that lists and details every country built with React.js
+A simple country listing app built with React.js
 
 ## Requirements
 
